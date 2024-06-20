@@ -1,7 +1,7 @@
-package com.skillbox.cryptobot.configuration;
+package com.cryptobot.configuration;
 
 
-import com.skillbox.cryptobot.bot.CryptoBot;
+import com.cryptobot.bot.CryptoBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.skillbox.cryptobot.service;
+package com.cryptobot.service;
 
-import com.skillbox.cryptobot.client.BinanceClient;
+import com.cryptobot.client.BinanceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
