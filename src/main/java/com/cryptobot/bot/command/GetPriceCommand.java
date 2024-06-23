@@ -1,5 +1,6 @@
 package com.cryptobot.bot.command;
 
+import com.cryptobot.dto.CoinPrice;
 import com.cryptobot.service.CryptoCurrencyService;
 import com.cryptobot.utils.TextUtil;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,10 @@ import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.bots.AbsSender;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * Обработка команды получения текущей стоимости валюты
@@ -35,7 +40,10 @@ public class GetPriceCommand implements IBotCommand {
         SendMessage answer = new SendMessage();
         answer.setChatId(message.getChatId());
         try {
-            answer.setText("Текущая цена биткоина " + TextUtil.toString(service.getBitcoinPrice()) + " USD");
+
+            CoinPrice coinPrice = service.getBitcoinPrice();
+            answer.setText("Текущая цена биткоина " + TextUtil.toString(coinPrice.getPrice()) + " USD - " +
+                    LocalDateTime.ofInstant(Instant.ofEpochMilli(coinPrice.getCloseTime()), ZoneId.systemDefault()));
             absSender.execute(answer);
         } catch (Exception e) {
             log.error("Ошибка возникла /get_price методе", e);

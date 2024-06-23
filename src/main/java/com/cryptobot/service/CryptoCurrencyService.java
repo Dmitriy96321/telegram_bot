@@ -1,6 +1,7 @@
 package com.cryptobot.service;
 
 import com.cryptobot.client.BinanceClient;
+import com.cryptobot.dto.CoinPrice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ public class CryptoCurrencyService {
         this.client = client;
     }
 
-    public double getBitcoinPrice() throws IOException {
-        if (price.get() == null) {
-            price.set(client.getBitcoinPrice());
-        }
-        return price.get();
+    public CoinPrice getBitcoinPrice() throws IOException {
+//        if (price.get() == null) {
+//            price.set(client.getBitcoinPrice());
+//        }
+
+        return client.getBitcoinPrice();
+//        return price.get();
     }
 }

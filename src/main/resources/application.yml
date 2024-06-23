@@ -4,7 +4,7 @@ telegram:
     token: ${BOT_TOKEN}
     notify:
       delay:
-        value: 10
+        value: 1
         unit: MINUTES
 
 binance:
