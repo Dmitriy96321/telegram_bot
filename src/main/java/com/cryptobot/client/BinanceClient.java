@@ -1,16 +1,10 @@
 package com.cryptobot.client;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
-
 import com.cryptobot.dto.CoinPrice;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;

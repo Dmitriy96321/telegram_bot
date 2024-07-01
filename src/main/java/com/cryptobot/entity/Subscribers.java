@@ -1,13 +1,17 @@
 package com.cryptobot.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "subscribers")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Subscribers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +23,7 @@ public class Subscribers {
 
     @Column(name = "pricing_subscription")
     private Double pricingSubscription;
+
+    @Column(name = "last_notice")
+    private LocalDateTime lastNotice;
 }

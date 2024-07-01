@@ -1,6 +1,7 @@
 package com.cryptobot.bot.command;
 
-import lombok.AllArgsConstructor;
+import com.cryptobot.service.CryptoCurrencyService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand;
@@ -12,13 +13,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.text.MessageFormat;
 
 
-/**
- * Обработка команды начала работы с ботом
- */
 @Service
-@AllArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class StartCommand implements IBotCommand {
+    private final CryptoCurrencyService cryptoCurrencyService;
 
     @Override
     public String getCommandIdentifier() {
@@ -34,11 +33,16 @@ public class StartCommand implements IBotCommand {
     public void processMessage(AbsSender absSender, Message message, String[] arguments) {
         SendMessage answer = new SendMessage();
         answer.setChatId(message.getChatId());
-
+        cryptoCurrencyService.createSubscriber(message.getFrom().getId());
         answer.setText(MessageFormat.format("""
                 Привет {0}! Данный бот помогает отслеживать стоимость биткоина.
+                Можно установить подписку на желаемую цену биткоина,
+                 когда цена опустится до нее, бот отправит уведомление.
                 Поддерживаемые команды:
-                 /get_price - получить стоимость биткоина
+                 /get_price - получить стоимость биткоина.
+                 /get_subscription - получить информацию о подписке.
+                 /subscribe [число] - подписатся на стоимость BTC в USD.
+                 /unsubscribe - отменить подписку.
                 """ ,message.getFrom().getFirstName()));
         try {
             absSender.execute(answer);
@@ -46,6 +50,6 @@ public class StartCommand implements IBotCommand {
             log.error("Error occurred in /start command", e);
         }
 
-
     }
+
 }
