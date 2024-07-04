@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CoinPrice {
-    double price;
-    long closeTime;
+    private double price;
+    private long closeTime;
 }
